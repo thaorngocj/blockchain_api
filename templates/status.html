@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trạng thái Blockchain</title>
+</head>
+<body>
+    <h1>Trạng thái Hiện tại của Blockchain</h1>
+    {% for block in chain %}
+        <div>
+            <h2>Khối {{ block.index }}</h2>
+            <p><strong>Hash trước:</strong> {{ block.previous_hash }}</p>
+            <p><strong>Bằng chứng:</strong> {{ block.proof }}</p>
+            <p><strong>Giao dịch:</strong></p>
+            <ul>
+                {% for transaction in block.transactions %}
+                    <li>{{ transaction.sender }} gửi {{ transaction.amount }} đến {{ transaction.receiver }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</body>
+</html>
