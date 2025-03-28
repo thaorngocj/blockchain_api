@@ -45,9 +45,13 @@ def add_transaction():
     return {'message': f'Transaction added to block {index}'}, 201
 # Chạy server cổng 5000
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8000))  
-    app.run(host='0.0.0.0', port=port, debug=True)
+    port = os.getenv("PORT")  # Lấy biến môi trường PORT
+    if port is None:
+        port = 5000  # Nếu không có, dùng 5000
+    else:
+        port = int(port)  # Chuyển thành số nguyên
 
+    app.run(host='0.0.0.0', port=port, debug=True)
 # NOTE:
 # curl -X POST http://127.0.0.1:5000/transaction -H "Content-Type: application/json" -d "{\"sender\": \"Alice\", \"receiver\": \"Bob\", \"amount\": 100}"
 # curl -X POST http://127.0.0.1:5000/transaction
