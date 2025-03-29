@@ -1,5 +1,5 @@
 import json, os, logging
-from flask import Flask, request
+from flask import Flask, request, render_template
 from blockchain import Blockchain
 
 # Cấu hình logging để ghi log vào file
@@ -17,7 +17,7 @@ def log_request_info():
 # Trang chủ
 @app.route('/', methods=['GET'])
 def home():
-    return {'message': 'Welcome to the Blockchain App!'}, 200
+    return render_template('home.html')
 
 # Đào block mới
 @app.route('/mine', methods=['GET'])
@@ -30,7 +30,7 @@ def mine():
 # Lấy toàn bộ blockchain
 @app.route('/chain', methods=['GET'])
 def get_chain():
-    return {'chain': blockchain.chain}, 200
+    return render_template('status.html', chain=blockchain.chain)
 
 # Thêm giao dịch mới
 @app.route('/transaction', methods=['POST'])
