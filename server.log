@@ -1,0 +1,52 @@
+2025-03-29 23:25:13,266 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-03-29 23:25:13,266 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-29 23:25:13,266 - INFO -  * Restarting with stat
+2025-03-29 23:25:13,509 - WARNING -  * Debugger is active!
+2025-03-29 23:25:13,511 - INFO -  * Debugger PIN: 778-713-581
+2025-03-29 23:25:23,977 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-03-29 23:25:23,977 - INFO - 127.0.0.1 - - [29/Mar/2025 23:25:23] "GET / HTTP/1.1" 200 -
+2025-03-29 23:25:23,994 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-03-29 23:25:23,994 - INFO - 127.0.0.1 - - [29/Mar/2025 23:25:23] "GET / HTTP/1.1" 200 -
+2025-03-29 23:25:24,109 - INFO - Request: GET http://127.0.0.1:5000/favicon.ico - Data: None
+2025-03-29 23:25:24,111 - INFO - 127.0.0.1 - - [29/Mar/2025 23:25:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-29 23:29:10,702 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-29 23:29:10,774 - INFO -  * Restarting with stat
+2025-03-29 23:29:11,044 - WARNING -  * Debugger is active!
+2025-03-29 23:29:11,044 - INFO -  * Debugger PIN: 778-713-581
+2025-03-29 23:29:18,087 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-29 23:29:18,116 - INFO -  * Restarting with stat
+2025-03-29 23:29:18,338 - WARNING -  * Debugger is active!
+2025-03-29 23:29:18,346 - INFO -  * Debugger PIN: 778-713-581
+2025-03-29 23:42:12,452 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-03-29 23:42:12,452 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-29 23:42:12,452 - INFO -  * Restarting with stat
+2025-03-29 23:42:12,682 - WARNING -  * Debugger is active!
+2025-03-29 23:42:12,685 - INFO -  * Debugger PIN: 778-713-581
+2025-03-29 23:42:22,832 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-03-29 23:42:22,839 - INFO - 127.0.0.1 - - [29/Mar/2025 23:42:22] "GET / HTTP/1.1" 200 -
+2025-03-29 23:54:01,951 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-03-29 23:54:01,968 - INFO - 127.0.0.1 - - [29/Mar/2025 23:54:01] "[35m[1mGET /chain HTTP/1.1[0m" 500 -
+2025-03-29 23:54:02,135 - INFO - 127.0.0.1 - - [29/Mar/2025 23:54:02] "GET /chain?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-03-29 23:54:02,135 - INFO - 127.0.0.1 - - [29/Mar/2025 23:54:02] "GET /chain?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-03-29 23:54:02,176 - INFO - 127.0.0.1 - - [29/Mar/2025 23:54:02] "GET /chain?__debugger__=yes&cmd=resource&f=console.png&s=IJQpHLSi2PEh7RCcRfLS HTTP/1.1" 200 -
+2025-03-29 23:54:02,190 - INFO - 127.0.0.1 - - [29/Mar/2025 23:54:02] "GET /chain?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-03-29 23:55:09,808 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-29 23:55:09,848 - INFO -  * Restarting with stat
+2025-03-29 23:55:10,129 - WARNING -  * Debugger is active!
+2025-03-29 23:55:10,136 - INFO -  * Debugger PIN: 778-713-581
+2025-03-29 23:55:13,495 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-03-29 23:55:13,511 - INFO - 127.0.0.1 - - [29/Mar/2025 23:55:13] "[35m[1mGET /chain HTTP/1.1[0m" 500 -
+2025-03-29 23:55:13,580 - INFO - 127.0.0.1 - - [29/Mar/2025 23:55:13] "[36mGET /chain?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-03-29 23:55:13,582 - INFO - 127.0.0.1 - - [29/Mar/2025 23:55:13] "[36mGET /chain?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-03-29 23:55:13,596 - INFO - 127.0.0.1 - - [29/Mar/2025 23:55:13] "GET /chain?__debugger__=yes&cmd=resource&f=console.png&s=md48pRdLq6zKj9eQNKRg HTTP/1.1" 200 -
+2025-03-29 23:55:13,608 - INFO - 127.0.0.1 - - [29/Mar/2025 23:55:13] "[36mGET /chain?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-03-29 23:56:38,283 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-03-29 23:56:38,292 - INFO - 127.0.0.1 - - [29/Mar/2025 23:56:38] "GET /chain HTTP/1.1" 200 -
+2025-03-30 00:01:13,913 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-30 00:01:13,943 - INFO -  * Restarting with stat

@@ -113,8 +113,13 @@ def mine():
 
 @app.route('/chain', methods=['GET'])
 def get_chain():
-    return render_template('status.html', chain=blockchain.chain)
-
+    # print("Blockchain hiện tại:", blockchain.chain)  
+    # return render_template('status.html', chain=blockchain.chain)
+    try:
+        return render_template('status.html', chain=blockchain.chain)
+    except Exception as e:
+        print(f"Lỗi khi render template: {e}")  # Log lỗi ra terminal
+        return "Lỗi hiển thị blockchain", 500
 @app.route('/transaction', methods=['POST'])
 def add_transaction():
     if request.content_type != 'application/json':
