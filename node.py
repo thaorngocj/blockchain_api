@@ -90,14 +90,15 @@ def log_request_info():
 #     return render_template('home.html') 
 @app.route('/', methods=['GET', 'HEAD'])
 def home():
-    print(f"Request method: {request.method}")
-    print(f"Request headers: {request.headers}")
+    # print(f"Request method: {request.method}")
+    # print(f"Request headers: {request.headers}")
 
-    # Chỉ kiểm tra Content-Type nếu request không phải GET hoặc HEAD
-    if request.method not in ["GET", "HEAD"] and request.content_type and request.content_type != "application/json":
-        return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
+    # # Chỉ kiểm tra Content-Type nếu request không phải GET hoặc HEAD
+    # if request.method not in ["GET", "HEAD"] and request.content_type and request.content_type != "application/json":
+    #     return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
 
-    return render_template('home.html')
+    # return render_template('home.html')
+    return "API is running!", 200
 @app.route('/mine', methods=['GET'])
 def mine():
     last_block = blockchain.get_previous_block()
