@@ -71,10 +71,12 @@ blockchain = Blockchain()
 
 @app.before_request
 def log_request_info():
-    try:
-        data = request.get_json(silent=True)
-    except Exception:
-        data = None
+    data = None
+    if request.method in ["POST", "PUT", "PATCH"]:  # Chỉ lấy JSON khi request có thể chứa JSON
+        try:
+            data = request.get_json(silent=True)
+        except Exception:
+            data = None
     logging.info(f"Request: {request.method} {request.url} - Data: {data}")
 
 # @app.route('/', methods=['GET'])
@@ -98,7 +100,8 @@ def home():
     #     return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
 
     # return render_template('home.html')
-    return "API is running!", 200
+    # return "API is running!", 200
+    return jsonify({"message": "API is running!"}), 200
 @app.route('/mine', methods=['GET'])
 def mine():
     last_block = blockchain.get_previous_block()
