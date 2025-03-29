@@ -77,14 +77,24 @@ def log_request_info():
         data = None
     logging.info(f"Request: {request.method} {request.url} - Data: {data}")
 
-@app.route('/', methods=['GET'])
-def home():
-    # return render_template('home.html')
-    # print(f"Received request with Content-Type: {request.content_type}")  # Debug
-    # return "<h1>Trang chủ Blockchain</h1>"  # Tạm thời thay vì render_template
-    print(f"Request headers: {request.headers}")
+# @app.route('/', methods=['GET'])
+# def home():
+#     # return render_template('home.html')
+#     # print(f"Received request with Content-Type: {request.content_type}")  # Debug
+#     # return "<h1>Trang chủ Blockchain</h1>"  # Tạm thời thay vì render_template
+#     print(f"Request headers: {request.headers}")
     
-    if request.content_type and request.content_type != "text/html":
+#     if request.content_type and request.content_type != "text/html":
+#         return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
+
+#     return render_template('home.html') 
+@app.route('/', methods=['GET', 'HEAD'])
+def home():
+    print(f"Request method: {request.method}")
+    print(f"Request headers: {request.headers}")
+
+    # Chỉ kiểm tra Content-Type nếu request không phải GET hoặc HEAD
+    if request.method not in ["GET", "HEAD"] and request.content_type and request.content_type != "application/json":
         return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
 
     return render_template('home.html')
