@@ -101,7 +101,9 @@ def home():
 
     # return render_template('home.html')
     # return "API is running!", 200
-    return jsonify({"message": "API is running!"}), 200
+    # return jsonify({"message": "API is running!"}), 200
+    print(f"Request headers: {request.headers}")  # Debug request headers
+    return render_template('home.html')
 @app.route('/mine', methods=['GET'])
 def mine():
     last_block = blockchain.get_previous_block()
