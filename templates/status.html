@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -19,5 +19,40 @@
             </ul>
         </div>
     {% endfor %}
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Blockchain Explorer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .card-header { background-color: #007bff; color: white; }
+        .transaction-list { max-height: 200px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center text-primary"><i class="fas fa-link"></i> Blockchain Explorer</h1>
+        {% for block in chain %}
+        <div class="card my-4">
+            <div class="card-header">Khối {{ block.index }}</div>
+            <div class="card-body">
+                <p><strong><i class="fas fa-hashtag"></i> Hash trước:</strong> {{ block.previous_hash }}</p>
+                <p><strong><i class="fas fa-cogs"></i> Bằng chứng:</strong> {{ block.proof }}</p>
+                <h4><i class="fas fa-exchange-alt"></i> Giao dịch:</h4>
+                <ul class="list-group transaction-list">
+                    {% for transaction in block.transactions %}
+                        <li class="list-group-item"> <i class="fas fa-user"></i> {{ transaction.sender }} gửi <strong>{{ transaction.amount }}</strong> đến <i class="fas fa-user"></i> {{ transaction.receiver }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

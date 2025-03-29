@@ -1,59 +1,58 @@
-import json, os
-from flask import Flask, request, jsonify
+import json, os, logging
+from flask import Flask, request
 from blockchain import Blockchain
+
+# Cấu hình logging để ghi log vào file
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Tạo ứng dụng Flask
 app = Flask(__name__)
-# Khởi tạo một blockchain mới
+# Khởi tạo blockchain
 blockchain = Blockchain()
 
-# Route trang chủ -> Truy cập http://127.0.0.1:5000/
+@app.before_request
+def log_request_info():
+    logging.info(f"Request: {request.method} {request.url} - Data: {request.get_json()}")
+
+# Trang chủ
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({'message': 'Welcome to the Blockchain App!'}), 200
+    return {'message': 'Welcome to the Blockchain App!'}, 200
 
-# Route để đào một block mới -> Truy cập http://127.0.0.1:5000/mine
+# Đào block mới
 @app.route('/mine', methods=['GET'])
 def mine():
     last_block = blockchain.get_previous_block()
     proof = blockchain.proof_of_work(last_block['proof'])
-    previous_hash = blockchain.hash(last_block)
+    block = blockchain.create_block(proof, blockchain.hash(last_block))
+    return {'message': 'New Block Mined!', 'block': block}, 200
 
-    # Thêm phần thưởng cho thợ đào
-    blockchain.add_transaction(sender="System", receiver="Miner", amount=10)
-
-    # Tạo block mới
-    block = blockchain.create_block(proof, previous_hash)
-    
-    return jsonify({'message': 'New Block Mined!', 'block': block}), 200
-
-# Route để hiển thị toàn bộ blockchain -> Truy cập http://127.0.0.1:5000/chain
+# Lấy toàn bộ blockchain
 @app.route('/chain', methods=['GET'])
 def get_chain():
-    return jsonify({'chain': blockchain.chain}), 200
+    return {'chain': blockchain.chain}, 200
 
-# Route để thêm giao dịch mới -> Truy cập http://127.0.0.1:5000/transaction
+# Thêm giao dịch mới
 @app.route('/transaction', methods=['POST'])
 def add_transaction():
-    if not request.is_json:
-        return jsonify({'message': 'Request phải là JSON!'}), 400
-
     data = request.get_json()
+    if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+        return {'error': 'Invalid transaction data'}, 400
     
-    # Kiểm tra nếu thiếu dữ liệu
-    required_fields = ['sender', 'receiver', 'amount']
-    if not all(field in data for field in required_fields):
-        return jsonify({'message': 'Thiếu dữ liệu!'}), 400
-
     index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
-    return jsonify({'message': f'Transaction added to block {index}'}), 201
+    return {'message': f'Transaction added to block {index}'}, 201
 
-# Chạy server Flask
-if __name__ == '__main__':
-    port = os.getenv("PORT")  # Lấy biến môi trường PORT
+# Xem log của server
+@app.route('/logs', methods=['GET'])
+def get_logs():
     try:
-        port = int(port) if port else 5000
-    except ValueError:
-        port = 5000  # Nếu giá trị không hợp lệ, mặc định 5000
+        with open("server.log", "r") as log_file:
+            logs = log_file.readlines()[-20:]  # Lấy 20 dòng log gần nhất
+        return {"logs": logs}, 200
+    except Exception as e:
+        return {"error": str(e)}, 500
 
+# Chạy server
+if __name__ == '__main__':
+    port = int(os.getenv("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
