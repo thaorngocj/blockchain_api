@@ -60,7 +60,7 @@
 # if __name__ == '__main__':
 #     port = int(os.getenv("PORT", 5000))
 #     app.run(host='0.0.0.0', port=port, debug=True)
-import json, os, logging
+import json, os, logging, traceback
 from flask import Flask, request, render_template, jsonify
 from blockchain import Blockchain
 
@@ -110,13 +110,26 @@ def mine():
     # proof = blockchain.proof_of_work(last_block['proof'])
     # block = blockchain.create_block(proof, blockchain.hash(last_block))
     # return jsonify({'message': 'New Block Mined!', 'block': block}), 200
+    # try:
+    #     block = blockchain.mine_block()  # Gọi hàm đào block
+    #     print(f"Block vừa được đào: {block}")  # Debug log
+    #     return render_template('mine.html', block=block)
+    # except Exception as e:
+    #     print(f"Lỗi khi render templates: {e}")
+    #     return "Lỗi hiển thị blockchain", 500
     try:
-        block = blockchain.mine_block()  # Gọi hàm đào block
+        last_block = blockchain.get_previous_block()  # Lấy block cuối cùng
+        proof = blockchain.proof_of_work(last_block['proof'])  # Tìm proof mới
+        previous_hash = blockchain.hash(last_block)  # Hash của block trước
+        block = blockchain.create_block(proof, previous_hash)  # Tạo block mới
+
         print(f"Block vừa được đào: {block}")  # Debug log
         return render_template('mine.html', block=block)
     except Exception as e:
-        print(f"Lỗi khi render templates: {e}")
-        return "Lỗi hiển thị blockchain", 500
+        import traceback
+        error_msg = traceback.format_exc()
+        print(f"Lỗi khi đào block:\n{error_msg}")
+        return f"Lỗi hệ thống:<br><pre>{error_msg}</pre>", 500
 @app.route('/chain', methods=['GET'])
 def get_chain():
     # print("Blockchain hiện tại:", blockchain.chain)  
