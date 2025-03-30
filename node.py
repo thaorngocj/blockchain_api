@@ -110,9 +110,13 @@ def mine():
     # proof = blockchain.proof_of_work(last_block['proof'])
     # block = blockchain.create_block(proof, blockchain.hash(last_block))
     # return jsonify({'message': 'New Block Mined!', 'block': block}), 200
-    block = blockchain.mine_block()
-    return render_template('mine.html', block=block)
-
+    try:
+        block = blockchain.mine_block()  # Gọi hàm đào block
+        print(f"Block vừa được đào: {block}")  # Debug log
+        return render_template('mine.html', block=block)
+    except Exception as e:
+        print(f"Lỗi khi render templates: {e}")
+        return "Lỗi hiển thị blockchain", 500
 @app.route('/chain', methods=['GET'])
 def get_chain():
     # print("Blockchain hiện tại:", blockchain.chain)  
