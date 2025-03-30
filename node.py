@@ -106,10 +106,12 @@ def home():
     return render_template('home.html')
 @app.route('/mine', methods=['GET'])
 def mine():
-    last_block = blockchain.get_previous_block()
-    proof = blockchain.proof_of_work(last_block['proof'])
-    block = blockchain.create_block(proof, blockchain.hash(last_block))
-    return jsonify({'message': 'New Block Mined!', 'block': block}), 200
+    # last_block = blockchain.get_previous_block()
+    # proof = blockchain.proof_of_work(last_block['proof'])
+    # block = blockchain.create_block(proof, blockchain.hash(last_block))
+    # return jsonify({'message': 'New Block Mined!', 'block': block}), 200
+    block = blockchain.mine_block()
+    return render_template('mine.html', block=block)
 
 @app.route('/chain', methods=['GET'])
 def get_chain():

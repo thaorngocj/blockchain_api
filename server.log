@@ -50,3 +50,13 @@
 2025-03-29 23:56:38,292 - INFO - 127.0.0.1 - - [29/Mar/2025 23:56:38] "GET /chain HTTP/1.1" 200 -
 2025-03-30 00:01:13,913 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
 2025-03-30 00:01:13,943 - INFO -  * Restarting with stat
+2025-03-30 00:06:17,215 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-03-30 00:06:17,215 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 00:06:17,215 - INFO -  * Restarting with stat
+2025-03-30 00:06:17,428 - WARNING -  * Debugger is active!
+2025-03-30 00:06:17,432 - INFO -  * Debugger PIN: 778-713-581
+2025-03-30 00:06:23,330 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-03-30 00:06:23,335 - INFO - 127.0.0.1 - - [30/Mar/2025 00:06:23] "GET / HTTP/1.1" 200 -
