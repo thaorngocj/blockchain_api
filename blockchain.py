@@ -22,7 +22,8 @@ class Blockchain:
         return block
     
     def get_previous_block(self):
-        return self.chain[-1]  # Lấy block cuối cùng trong chuỗi
+        # return self.chain[-1]  # Lấy block cuối cùng trong chuỗi
+        return json.loads(json.dumps(self.chain[-1], ensure_ascii=False))
     
     def proof_of_work(self, previous_proof):
         new_proof = 1
@@ -39,10 +40,17 @@ class Blockchain:
         encoded_block = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(encoded_block).hexdigest()
     
+    # def add_transaction(self, sender, receiver, amount):
+    #     self.transactions.append({
+    #         'sender': sender,
+    #         'receiver': receiver,
+    #         'amount': amount
+    #     })
+    #     return self.get_previous_block()['index'] + 1  # Block tiếp theo dự kiến chứa giao dịch này
     def add_transaction(self, sender, receiver, amount):
         self.transactions.append({
             'sender': sender,
             'receiver': receiver,
             'amount': amount
         })
-        return self.get_previous_block()['index'] + 1  # Block tiếp theo dự kiến chứa giao dịch này
+        return True 

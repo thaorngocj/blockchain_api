@@ -132,13 +132,19 @@ def mine():
         return f"Lỗi hệ thống:<br><pre>{error_msg}</pre>", 500
 @app.route('/chain', methods=['GET'])
 def get_chain():
-    # print("Blockchain hiện tại:", blockchain.chain)  
-    # return render_template('status.html', chain=blockchain.chain)
     try:
+        print("Blockchain hiện tại:", json.dumps(blockchain.chain, indent=4, ensure_ascii=False))  # Hiển thị Unicode rõ ràng
         return render_template('status.html', chain=blockchain.chain)
     except Exception as e:
-        print(f"Lỗi khi render template: {e}")  # Log lỗi ra terminal
-        return "Lỗi hiển thị blockchain", 500
+        error_message = f"Lỗi khi render template: {e}\n{traceback.format_exc()}"
+        print(error_message)  # Xuất lỗi ra terminal
+
+        # Ghi log lỗi với UTF-8 để tránh lỗi UnicodeEncodeError
+        with open("error.log", "w", encoding="utf-8") as log_file:
+            log_file.write(error_message + "\n")
+
+        return f"<pre>{error_message}</pre>", 500
+    
 @app.route('/transaction', methods=['POST'])
 def add_transaction():
     if request.content_type != 'application/json':
