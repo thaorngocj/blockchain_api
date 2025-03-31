@@ -72,7 +72,7 @@ blockchain = Blockchain()
 @app.before_request
 def log_request_info():
     data = None
-    if request.method in ["POST", "PUT", "PATCH"]:  # Chỉ lấy JSON khi request có thể chứa JSON
+    if request.method in ["POST", "PUT", "PATCH"]:  
         try:
             data = request.get_json(silent=True)
         except Exception:
@@ -90,6 +90,7 @@ def log_request_info():
 #         return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
 
 #     return render_template('home.html') 
+
 @app.route('/', methods=['GET', 'HEAD'])
 def home():
     # print(f"Request method: {request.method}")
@@ -104,6 +105,7 @@ def home():
     # return jsonify({"message": "API is running!"}), 200
     print(f"Request headers: {request.headers}")  # Debug request headers
     return render_template('home.html')
+
 @app.route('/mine', methods=['GET'])
 def mine():
     # last_block = blockchain.get_previous_block()
@@ -118,28 +120,28 @@ def mine():
     #     print(f"Lỗi khi render templates: {e}")
     #     return "Lỗi hiển thị blockchain", 500
     try:
-        last_block = blockchain.get_previous_block()  # Lấy block cuối cùng
-        proof = blockchain.proof_of_work(last_block['proof'])  # Tìm proof mới
-        previous_hash = blockchain.hash(last_block)  # Hash của block trước
-        block = blockchain.create_block(proof, previous_hash)  # Tạo block mới
+        last_block = blockchain.get_previous_block()  
+        proof = blockchain.proof_of_work(last_block['proof'])  
+        previous_hash = blockchain.hash(last_block)  
+        block = blockchain.create_block(proof, previous_hash)  
 
-        print(f"Block vừa được đào: {block}")  # Debug log
+        print(f"Block vừa được đào: {block}")  
         return render_template('mine.html', block=block)
     except Exception as e:
         import traceback
         error_msg = traceback.format_exc()
         print(f"Lỗi khi đào block:\n{error_msg}")
         return f"Lỗi hệ thống:<br><pre>{error_msg}</pre>", 500
+    
 @app.route('/chain', methods=['GET'])
 def get_chain():
     try:
-        print("Blockchain hiện tại:", json.dumps(blockchain.chain, indent=4, ensure_ascii=False))  # Hiển thị Unicode rõ ràng
+        print("Blockchain hiện tại:", json.dumps(blockchain.chain, indent=4, ensure_ascii=False))  
         return render_template('status.html', chain=blockchain.chain)
     except Exception as e:
         error_message = f"Lỗi khi render template: {e}\n{traceback.format_exc()}"
-        print(error_message)  # Xuất lỗi ra terminal
-
-        # Ghi log lỗi với UTF-8 để tránh lỗi UnicodeEncodeError
+        print(error_message) 
+        
         with open("error.log", "w", encoding="utf-8") as log_file:
             log_file.write(error_message + "\n")
 

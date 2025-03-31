@@ -5,24 +5,23 @@ from flask import Flask, request
 
 class Blockchain:
     def __init__(self):
-        self.chain = []  # Danh sách chứa các block trong chuỗi
-        self.transactions = []  # Danh sách các giao dịch đang chờ xử lý
-        self.create_block(proof=1, previous_hash='0')  # Tạo block khởi đầu (Genesis Block)
+        self.chain = []  
+        self.transactions = []  
+        self.create_block(proof=1, previous_hash='0')  
     
     def create_block(self, proof, previous_hash):
         block = {
             'index': len(self.chain) + 1,
             'timestamp': time.time(),
-            'transactions': self.transactions.copy(),  # Sao chép danh sách giao dịch trước khi thêm vào block
+            'transactions': self.transactions.copy(), 
             'proof': proof,
             'previous_hash': previous_hash
         }
-        self.chain.append(block)  # Đưa block vào blockchain trước khi xóa danh sách giao dịch
-        self.transactions = []  # Reset danh sách giao dịch sau khi đã ghi vào block
+        self.chain.append(block)  
+        self.transactions = [] 
         return block
     
     def get_previous_block(self):
-        # return self.chain[-1]  # Lấy block cuối cùng trong chuỗi
         return json.loads(json.dumps(self.chain[-1], ensure_ascii=False))
     
     def proof_of_work(self, previous_proof):
