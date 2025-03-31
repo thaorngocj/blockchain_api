@@ -162,23 +162,88 @@ def get_chain():
 #     except Exception as e:
 #         return jsonify({'error': str(e)}), 500
     
+# @app.route('/transaction', methods=['GET', 'POST'])
+# def add_transaction():
+#     if request.method == 'POST':
+#         sender = request.form.get('sender')
+#         receiver = request.form.get('receiver')
+#         amount = request.form.get('amount')
+
+#         if not sender or not receiver or not amount:
+#             return render_template('transaction.html', error="Vui lòng nhập đầy đủ thông tin!")
+
+#         try:
+#             index = blockchain.add_transaction(sender, receiver, float(amount))
+#             return render_template('transaction.html', success=f'Giao dịch đã được thêm vào khối {index}')
+#         except Exception as e:
+#             return render_template('transaction.html', error=str(e))
+#     return render_template('transaction.html')
+
+
+# @app.route('/transaction', methods=['GET', 'POST'])
+# def add_transaction():
+#     if request.method == 'GET':
+#         return render_template('transaction.html')  # Hiển thị form nhập
+
+#     # Xử lý khi form gửi dữ liệu bằng POST
+#     if request.content_type != 'application/json':
+#         return jsonify({'error': 'Content-Type must be application/json'}), 415
+
+#     try:
+#         data = request.get_json()
+#         if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+#             return jsonify({'error': 'Invalid transaction data'}), 400
+        
+#         index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
+#         return jsonify({'message': f'Transaction added to block {index}'}), 201
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+
+# @app.route('/transaction', methods=['GET', 'POST'])
+# def add_transaction():
+#     if request.method == 'GET':
+#         return render_template('transaction.html')  # Trả về trang nhập giao dịch
+
+#     if request.method == 'POST':
+#         if request.content_type != 'application/json' and request.content_type != 'application/x-www-form-urlencoded':
+#             return jsonify({'error': 'Content-Type must be application/json or form-urlencoded'}), 415
+        
+#         try:
+#             data = request.get_json() if request.is_json else request.form
+
+#             if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+#                 return jsonify({'error': 'Invalid transaction data'}), 400
+
+#             index = blockchain.add_transaction(data['sender'], data['receiver'], int(data['amount']))
+#             return jsonify({'message': f'Transaction added to block {index}'}), 201
+#         except Exception as e:
+#             print("Error:", str(e))
+#             return jsonify({'error': str(e)}), 500
+
 @app.route('/transaction', methods=['GET', 'POST'])
 def add_transaction():
+    if request.method == 'GET':
+        return render_template('transaction.html')
+
     if request.method == 'POST':
-        sender = request.form.get('sender')
-        receiver = request.form.get('receiver')
-        amount = request.form.get('amount')
-
-        if not sender or not receiver or not amount:
-            return render_template('transaction.html', error="Vui lòng nhập đầy đủ thông tin!")
-
         try:
-            index = blockchain.add_transaction(sender, receiver, float(amount))
-            return render_template('transaction.html', success=f'Giao dịch đã được thêm vào khối {index}')
-        except Exception as e:
-            return render_template('transaction.html', error=str(e))
+            print("Received request:", request.method)
+            print("Content-Type:", request.content_type)
 
-    return render_template('transaction.html')
+            # Kiểm tra kiểu dữ liệu đầu vào
+            data = request.get_json() if request.is_json else request.form
+            print("Received Data:", data)  
+
+            if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+                print("Invalid Data")
+                return jsonify({'error': 'Invalid transaction data'}), 400
+
+            index = blockchain.add_transaction(data['sender'], data['receiver'], int(data['amount']))
+            print(f"Transaction added to block {index}")
+            return jsonify({'message': f'Transaction added to block {index}'}), 201
+        except Exception as e:
+            print("Error:", str(e))  # In lỗi ra console
+            return jsonify({'error': str(e)}), 500
 
 @app.route('/logs', methods=['GET'])
 def get_logs():

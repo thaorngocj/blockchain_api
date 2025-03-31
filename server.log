@@ -336,3 +336,77 @@
 2025-03-30 23:41:00,162 - INFO - 127.0.0.1 - - [30/Mar/2025 23:41:00] "GET /mine HTTP/1.1" 200 -
 2025-03-30 23:42:53,012 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
 2025-03-30 23:42:53,015 - INFO - 127.0.0.1 - - [30/Mar/2025 23:42:53] "GET /chain HTTP/1.1" 200 -
+2025-03-31 11:52:31,807 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.7.75.186:5000
+2025-03-31 11:52:31,807 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 11:52:31,810 - INFO -  * Restarting with stat
+2025-03-31 11:52:32,074 - WARNING -  * Debugger is active!
+2025-03-31 11:52:32,080 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 11:53:45,463 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 11:53:45,506 - INFO -  * Restarting with stat
+2025-03-31 11:53:45,807 - WARNING -  * Debugger is active!
+2025-03-31 11:53:45,809 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 11:53:48,834 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 11:53:48,869 - INFO -  * Restarting with stat
+2025-03-31 11:53:49,093 - WARNING -  * Debugger is active!
+2025-03-31 11:53:49,100 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 11:53:51,119 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 11:53:51,158 - INFO -  * Restarting with stat
+2025-03-31 11:53:51,362 - WARNING -  * Debugger is active!
+2025-03-31 11:53:51,368 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 11:53:54,393 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 11:53:54,437 - INFO -  * Restarting with stat
+2025-03-31 11:53:54,655 - WARNING -  * Debugger is active!
+2025-03-31 11:53:54,655 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 11:53:57,680 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.7.75.186:5000
+2025-03-31 11:53:57,680 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 11:53:57,680 - INFO -  * Restarting with stat
+2025-03-31 11:53:57,907 - WARNING -  * Debugger is active!
+2025-03-31 11:53:57,912 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 12:59:09,407 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-31 12:59:09,407 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 12:59:09,407 - INFO -  * Restarting with stat
+2025-03-31 12:59:09,619 - WARNING -  * Debugger is active!
+2025-03-31 12:59:09,619 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 12:59:53,852 - INFO -  * Detected change in 'D:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 12:59:53,899 - INFO -  * Restarting with stat
+2025-03-31 12:59:54,226 - WARNING -  * Debugger is active!
+2025-03-31 12:59:54,226 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 12:59:56,248 - INFO -  * Detected change in 'D:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 12:59:56,334 - INFO -  * Restarting with stat
+2025-03-31 12:59:56,612 - WARNING -  * Debugger is active!
+2025-03-31 12:59:56,616 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 13:00:21,751 - INFO -  * Detected change in 'D:\\SimpleBlockChain\\node.py', reloading
+2025-03-31 13:00:21,827 - INFO -  * Restarting with stat
+2025-03-31 13:00:22,140 - WARNING -  * Debugger is active!
+2025-03-31 13:00:22,149 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 13:00:24,061 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: {'sender': 'Alice', 'receiver': 'Bob', 'amount': 50}
+2025-03-31 13:00:24,066 - INFO - 127.0.0.1 - - [31/Mar/2025 13:00:24] "[35m[1mPOST /transaction HTTP/1.1[0m" 201 -
+2025-03-31 13:01:30,390 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-03-31 13:01:30,583 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:30] "GET /mine HTTP/1.1" 200 -
+2025-03-31 13:01:34,521 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-03-31 13:01:34,587 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:34] "[35m[1mGET /transaction HTTP/1.1[0m" 500 -
+2025-03-31 13:01:34,860 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:34] "GET /transaction?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-03-31 13:01:34,860 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:34] "GET /transaction?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-03-31 13:01:34,919 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:34] "GET /transaction?__debugger__=yes&cmd=resource&f=console.png&s=E1kyhMcAglRmoE8Vfxd3 HTTP/1.1" 200 -
+2025-03-31 13:01:34,942 - INFO - 127.0.0.1 - - [31/Mar/2025 13:01:34] "GET /transaction?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-03-31 13:03:20,143 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.7.75.186:5000
+2025-03-31 13:03:20,143 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 13:03:20,143 - INFO -  * Restarting with stat
+2025-03-31 13:03:20,392 - WARNING -  * Debugger is active!
+2025-03-31 13:03:20,392 - INFO -  * Debugger PIN: 778-713-581
+2025-03-31 13:03:26,324 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-03-31 13:03:26,329 - INFO - 127.0.0.1 - - [31/Mar/2025 13:03:26] "GET /transaction HTTP/1.1" 200 -
+2025-03-31 13:03:26,660 - INFO - Request: GET http://127.0.0.1:5000/favicon.ico - Data: None
+2025-03-31 13:03:26,660 - INFO - 127.0.0.1 - - [31/Mar/2025 13:03:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-31 13:03:35,115 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-03-31 13:03:35,120 - INFO - 127.0.0.1 - - [31/Mar/2025 13:03:35] "GET / HTTP/1.1" 200 -
