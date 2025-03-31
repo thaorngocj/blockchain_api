@@ -147,20 +147,38 @@ def get_chain():
 
         return f"<pre>{error_message}</pre>", 500
     
-@app.route('/transaction', methods=['POST'])
-def add_transaction():
-    if request.content_type != 'application/json':
-        return jsonify({'error': 'Content-Type must be application/json'}), 415
+# @app.route('/transaction', methods=['POST'])
+# def add_transaction():
+#     if request.content_type != 'application/json':
+#         return jsonify({'error': 'Content-Type must be application/json'}), 415
     
-    try:
-        data = request.get_json()
-        if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-            return jsonify({'error': 'Invalid transaction data'}), 400
+#     try:
+#         data = request.get_json()
+#         if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+#             return jsonify({'error': 'Invalid transaction data'}), 400
         
-        index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
-        return jsonify({'message': f'Transaction added to block {index}'}), 201
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#         index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
+#         return jsonify({'message': f'Transaction added to block {index}'}), 201
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+    
+@app.route('/transaction', methods=['GET', 'POST'])
+def add_transaction():
+    if request.method == 'POST':
+        sender = request.form.get('sender')
+        receiver = request.form.get('receiver')
+        amount = request.form.get('amount')
+
+        if not sender or not receiver or not amount:
+            return render_template('transaction.html', error="Vui lòng nhập đầy đủ thông tin!")
+
+        try:
+            index = blockchain.add_transaction(sender, receiver, float(amount))
+            return render_template('transaction.html', success=f'Giao dịch đã được thêm vào khối {index}')
+        except Exception as e:
+            return render_template('transaction.html', error=str(e))
+
+    return render_template('transaction.html')
 
 @app.route('/logs', methods=['GET'])
 def get_logs():

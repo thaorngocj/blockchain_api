@@ -40,16 +40,21 @@ class Blockchain:
         return hashlib.sha256(encoded_block).hexdigest()
     
     # def add_transaction(self, sender, receiver, amount):
-    #     self.transactions.append({
-    #         'sender': sender,
-    #         'receiver': receiver,
-    #         'amount': amount
-    #     })
-    #     return self.get_previous_block()['index'] + 1  # Block tiếp theo dự kiến chứa giao dịch này
+    #    self.transactions.append({
+    #        'sender': sender,
+    #        'receiver': receiver,
+    #        'amount': amount
+    #    })
+    #    return self.get_previous_block()['index'] + 1  # Block tiếp theo dự kiến chứa giao dịch này
+    
+    # def add_transaction(self, sender, receiver, amount):
+    #    self.transactions.append({
+    #        'sender': sender,
+    #        'receiver': receiver,
+    #        'amount': amount
+    #    })
+    #    return True 
     def add_transaction(self, sender, receiver, amount):
-        self.transactions.append({
-            'sender': sender,
-            'receiver': receiver,
-            'amount': amount
-        })
-        return True 
+        transaction = {"sender": sender, "receiver": receiver, "amount": amount}
+        self.transactions.append(transaction)
+        return len(self.chain) + 1
