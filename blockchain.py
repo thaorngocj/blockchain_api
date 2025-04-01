@@ -54,7 +54,24 @@ class Blockchain:
     #        'amount': amount
     #    })
     #    return True 
+    
+    # def add_transaction(self, sender, receiver, amount):
+    #     transaction = {"sender": sender, "receiver": receiver, "amount": amount}
+    #     self.transactions.append(transaction)
+    #     return len(self.chain) + 1
+    
     def add_transaction(self, sender, receiver, amount):
+    # Thêm giao dịch vào danh sách giao dịch
         transaction = {"sender": sender, "receiver": receiver, "amount": amount}
         self.transactions.append(transaction)
-        return len(self.chain) + 1
+
+        # Tạo một khối mới sau khi thêm giao dịch
+        previous_block = self.get_previous_block()
+        previous_proof = previous_block['proof']
+        proof = self.proof_of_work(previous_proof)
+        previous_hash = self.hash(previous_block)
+
+        # Tạo block mới và thêm vào chain
+        block = self.create_block(proof, previous_hash)
+
+        return len(self.chain)  # Trả về số lượng block hiện tại (số khối đã tạo)

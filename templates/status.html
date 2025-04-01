@@ -15,6 +15,13 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center text-primary"><i class="fas fa-link"></i> Blockchain Explorer</h1>
+        
+        <!-- Nút chuyển về Trang Chủ (sát trái) và Nút Mỏ Khối (sát phải) -->
+        <div class="d-flex justify-content-between mt-4">
+            <a href="/" class="btn btn-primary">Về Trang Chủ</a>
+            <a href="/mine" class="btn btn-success">Mỏ Khối (Mine)</a>
+        </div>
+
         {% for block in chain %}
         <div class="card my-4">
             <div class="card-header">Khối {{ block.index }}</div>
@@ -24,7 +31,11 @@
                 <h4><i class="fas fa-exchange-alt"></i> Giao dịch:</h4>
                 <ul class="list-group transaction-list">
                     {% for transaction in block.transactions %}
-                        <li class="list-group-item"> <i class="fas fa-user"></i> {{ transaction.sender }} gửi <strong>{{ transaction.amount }}</strong> đến <i class="fas fa-user"></i> {{ transaction.receiver }}</li>
+                        <li class="list-group-item">
+                            <i class="fas fa-user"></i> {{ transaction.sender }} gửi 
+                            <strong>{{ transaction.amount }}</strong> đến 
+                            <i class="fas fa-user"></i> {{ transaction.receiver }}
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -32,5 +43,4 @@
         {% endfor %}
     </div>
 </body>
-</html> 
-
+</html>
