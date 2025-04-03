@@ -1,308 +1,98 @@
-# import json, os, logging
-# from flask import Flask, request, render_template
-# from blockchain import Blockchain
+import json, os, logging, traceback  # Các thư viện cần thiết cho việc xử lý JSON, cấu hình hệ thống, ghi log, và xử lý ngoại lệ.
+from flask import Flask, request, render_template, jsonify, redirect  # Import các phương thức của Flask như tạo ứng dụng, yêu cầu HTTP, render template, JSON, và redirect.
+from blockchain import Blockchain  # Import lớp Blockchain từ file blockchain.py để sử dụng trong ứng dụng.
 
-# # Cấu hình logging để ghi log vào file
-# logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')  # Cấu hình ghi log vào file server.log, mức log là INFO.
 
-# # Tạo ứng dụng Flask
-# app = Flask(__name__)
-# # Khởi tạo blockchain
-# blockchain = Blockchain()
-
-# @app.before_request
-# def log_request_info():
-#     try:
-#         data = request.get_json(silent=True)  # Không báo lỗi nếu request không phải JSON
-#     except Exception:
-#         data = None
-#     logging.info(f"Request: {request.method} {request.url} - Data: {data}")
-
-# # Trang chủ
-# @app.route('/', methods=['GET'])
-# def home():
-#     return render_template('home.html')
-
-# # Đào block mới
-# @app.route('/mine', methods=['GET'])
-# def mine():
-#     last_block = blockchain.get_previous_block()
-#     proof = blockchain.proof_of_work(last_block['proof'])
-#     block = blockchain.create_block(proof, blockchain.hash(last_block))
-#     return {'message': 'New Block Mined!', 'block': block}, 200
-
-# # Lấy toàn bộ blockchain
-# @app.route('/chain', methods=['GET'])
-# def get_chain():
-#     return render_template('status.html', chain=blockchain.chain)
-
-# # Thêm giao dịch mới
-# @app.route('/transaction', methods=['POST'])
-# def add_transaction():
-#     data = request.get_json()
-#     if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-#         return {'error': 'Invalid transaction data'}, 400
-    
-#     index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
-#     return {'message': f'Transaction added to block {index}'}, 201
-
-# # Xem log của server
-# @app.route('/logs', methods=['GET'])
-# def get_logs():
-#     try:
-#         with open("server.log", "r") as log_file:
-#             logs = log_file.readlines()[-20:]  # Lấy 20 dòng log gần nhất
-#         return {"logs": logs}, 200
-#     except Exception as e:
-#         return {"error": str(e)}, 500
-
-# # Chạy server
-# if __name__ == '__main__':
-#     port = int(os.getenv("PORT", 5000))
-#     app.run(host='0.0.0.0', port=port, debug=True)
-import json, os, logging, traceback
-from flask import Flask, request, render_template, jsonify,  redirect
-from blockchain import Blockchain
-
-logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-app = Flask(__name__)
-blockchain = Blockchain()
+app = Flask(__name__)  # Khởi tạo ứng dụng Flask.
+blockchain = Blockchain()  # Tạo một đối tượng blockchain để quản lý dữ liệu blockchain.
 
 @app.before_request
 def log_request_info():
-    data = None
-    if request.method in ["POST", "PUT", "PATCH"]:  
+    data = None  # Khởi tạo biến data để lưu dữ liệu yêu cầu.
+    if request.method in ["POST", "PUT", "PATCH"]:  # Kiểm tra xem phương thức yêu cầu có phải là POST, PUT hoặc PATCH không.
         try:
-            data = request.get_json(silent=True)
+            data = request.get_json(silent=True)  # Nếu là JSON, lấy dữ liệu JSON từ yêu cầu.
         except Exception:
-            data = None
-    logging.info(f"Request: {request.method} {request.url} - Data: {data}")
-
-# @app.route('/', methods=['GET'])
-# def home():
-#     # return render_template('home.html')
-#     # print(f"Received request with Content-Type: {request.content_type}")  # Debug
-#     # return "<h1>Trang chủ Blockchain</h1>"  # Tạm thời thay vì render_template
-#     print(f"Request headers: {request.headers}")
-    
-#     if request.content_type and request.content_type != "text/html":
-#         return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
-
-#     return render_template('home.html') 
+            data = None  # Nếu có lỗi khi lấy dữ liệu JSON, gán data = None.
+    logging.info(f"Request: {request.method} {request.url} - Data: {data}")  # Ghi log thông tin yêu cầu.
 
 @app.route('/', methods=['GET', 'HEAD'])
 def home():
-    # print(f"Request method: {request.method}")
-    # print(f"Request headers: {request.headers}")
+    print(f"Request headers: {request.headers}")  # In ra các header của yêu cầu, dùng cho mục đích debug.
+    return render_template('home.html')  # Render và trả về template 'home.html' cho trang chủ.
 
-    # # Chỉ kiểm tra Content-Type nếu request không phải GET hoặc HEAD
-    # if request.method not in ["GET", "HEAD"] and request.content_type and request.content_type != "application/json":
-    #     return jsonify({'error': f'Invalid Content-Type: {request.content_type}'}), 415
-
-    # return render_template('home.html')
-    # return "API is running!", 200
-    # return jsonify({"message": "API is running!"}), 200
-    print(f"Request headers: {request.headers}")  # Debug request headers
-    return render_template('home.html')
-
-# @app.route('/mine', methods=['GET'])
-# def mine():
-#     # (last_block = blockchain.get_previous_block()
-#     # proof = blockchain.proof_of_work(last_block['proof'])
-#     # block = blockchain.create_block(proof, blockchain.hash(last_block))
-#     # return jsonify({'message': 'New Block Mined!', 'block': block}), 200
-#     # try:
-#     #     block = blockchain.mine_block()  # Gọi hàm đào block
-#     #     print(f"Block vừa được đào: {block}")  # Debug log
-#     #     return render_template('mine.html', block=block)
-#     # except Exception as e:
-#     #     print(f"Lỗi khi render templates: {e}")
-#     #     return "Lỗi hiển thị blockchain", 500)
-#     try:
-#         last_block = blockchain.get_previous_block()  
-#         proof = blockchain.proof_of_work(last_block['proof'])  
-#         previous_hash = blockchain.hash(last_block)  
-#         block = blockchain.create_block(proof, previous_hash)  
-
-#         print(f"Block vừa được đào: {block}")  
-#         return render_template('mine.html', block=block)
-#     except Exception as e:
-#         import traceback
-#         error_msg = traceback.format_exc()
-#         print(f"Lỗi khi đào block:\n{error_msg}")
-#         return f"Lỗi hệ thống:<br><pre>{error_msg}</pre>", 500
-    
 @app.route('/mine', methods=['GET'])
 def mine():
-    # Lấy thông tin block trước đó
-    previous_block = blockchain.get_previous_block()
-    previous_proof = previous_block['proof']
+    if blockchain.transactions:  # Kiểm tra xem có giao dịch chưa được đào không.
+        previous_block = blockchain.get_previous_block()  # Lấy khối trước đó trong blockchain.
+        previous_proof = previous_block['proof']  # Lấy proof của khối trước đó.
 
-    # Thực hiện Proof of Work và tạo proof mới
-    proof = blockchain.proof_of_work(previous_proof)
+        proof = blockchain.proof_of_work(previous_proof)  # Tính toán proof-of-work cho khối mới.
+        previous_hash = blockchain.hash(previous_block)  # Tính toán hash của khối trước đó.
 
-    # Lấy hash của block trước đó
-    previous_hash = blockchain.hash(previous_block)
+        block = blockchain.create_block(proof, previous_hash)  # Tạo block mới và thêm vào blockchain.
+        
+        blockchain.transactions = []  # Làm sạch danh sách giao dịch sau khi đã tạo block.
 
-    # Tạo block mới và thêm giao dịch vào block này
-    block = blockchain.create_block(proof, previous_hash)
-
-    # Sau khi đào xong block, trả về trang mine với thông tin block mới
-    return render_template('mine.html', block=block)
+        return render_template('mine.html', message="Block đã được tạo!", block=block)  # Render template 'mine.html' và hiển thị thông báo thành công.
+    else:
+        return render_template('mine.html', message="Không có giao dịch để đào.")  # Nếu không có giao dịch, hiển thị thông báo không có giao dịch để đào.
 
 @app.route('/chain', methods=['GET'])
 def get_chain():
     try:
-        print("Blockchain hiện tại:", json.dumps(blockchain.chain, indent=4, ensure_ascii=False))  
-        return render_template('status.html', chain=blockchain.chain)
+        print("Blockchain hiện tại:", json.dumps(blockchain.chain, indent=4, ensure_ascii=False))  # In ra blockchain hiện tại dưới dạng JSON đẹp.
+        return render_template('status.html', chain=blockchain.chain)  # Render template 'status.html' để hiển thị trạng thái của blockchain.
     except Exception as e:
-        error_message = f"Lỗi khi render template: {e}\n{traceback.format_exc()}"
-        print(error_message) 
+        error_message = f"Lỗi khi render template: {e}\n{traceback.format_exc()}"  # Xử lý ngoại lệ và ghi lại lỗi.
+        print(error_message)  # In lỗi ra console.
         
-        with open("error.log", "w", encoding="utf-8") as log_file:
+        with open("error.log", "w", encoding="utf-8") as log_file:  # Mở file log lỗi và ghi lỗi vào đó.
             log_file.write(error_message + "\n")
 
-        return f"<pre>{error_message}</pre>", 500
-    
-# @app.route('/transaction', methods=['POST'])
-# def add_transaction():
-#     if request.content_type != 'application/json':
-#         return jsonify({'error': 'Content-Type must be application/json'}), 415
-    
-#     try:
-#         data = request.get_json()
-#         if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-#             return jsonify({'error': 'Invalid transaction data'}), 400
-        
-#         index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
-#         return jsonify({'message': f'Transaction added to block {index}'}), 201
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
-    
-# @app.route('/transaction', methods=['GET', 'POST'])
-# def add_transaction():
-#     if request.method == 'POST':
-#         sender = request.form.get('sender')
-#         receiver = request.form.get('receiver')
-#         amount = request.form.get('amount')
-
-#         if not sender or not receiver or not amount:
-#             return render_template('transaction.html', error="Vui lòng nhập đầy đủ thông tin!")
-
-#         try:
-#             index = blockchain.add_transaction(sender, receiver, float(amount))
-#             return render_template('transaction.html', success=f'Giao dịch đã được thêm vào khối {index}')
-#         except Exception as e:
-#             return render_template('transaction.html', error=str(e))
-#     return render_template('transaction.html')
-
-
-# @app.route('/transaction', methods=['GET', 'POST'])
-# def add_transaction():
-#     if request.method == 'GET':
-#         return render_template('transaction.html')  # Hiển thị form nhập
-
-#     # Xử lý khi form gửi dữ liệu bằng POST
-#     if request.content_type != 'application/json':
-#         return jsonify({'error': 'Content-Type must be application/json'}), 415
-
-#     try:
-#         data = request.get_json()
-#         if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-#             return jsonify({'error': 'Invalid transaction data'}), 400
-        
-#         index = blockchain.add_transaction(data['sender'], data['receiver'], data['amount'])
-#         return jsonify({'message': f'Transaction added to block {index}'}), 201
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
-
-# @app.route('/transaction', methods=['GET', 'POST'])
-# def add_transaction():
-#     if request.method == 'GET':
-#         return render_template('transaction.html')  # Trả về trang nhập giao dịch
-
-#     if request.method == 'POST':
-#         if request.content_type != 'application/json' and request.content_type != 'application/x-www-form-urlencoded':
-#             return jsonify({'error': 'Content-Type must be application/json or form-urlencoded'}), 415
-        
-#         try:
-#             data = request.get_json() if request.is_json else request.form
-
-#             if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-#                 return jsonify({'error': 'Invalid transaction data'}), 400
-
-#             index = blockchain.add_transaction(data['sender'], data['receiver'], int(data['amount']))
-#             return jsonify({'message': f'Transaction added to block {index}'}), 201
-#         except Exception as e:
-#             print("Error:", str(e))
-#             return jsonify({'error': str(e)}), 500
-
-# @app.route('/transaction', methods=['GET', 'POST'])
-# def add_transaction():
-#     if request.method == 'GET':
-#         return render_template('transaction.html')
-
-#     if request.method == 'POST':
-#         try:
-#             print("Received request:", request.method)
-#             print("Content-Type:", request.content_type)
-
-#             # Kiểm tra kiểu dữ liệu đầu vào
-#             data = request.get_json() if request.is_json else request.form
-#             print("Received Data:", data)  
-
-#             if not data or 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-#                 print("Invalid Data")
-#                 return jsonify({'error': 'Invalid transaction data'}), 400
-
-#             index = blockchain.add_transaction(data['sender'], data['receiver'], int(data['amount']))
-#             print(f"Transaction added to block {index}")
-#             return jsonify({'message': f'Transaction added to block {index}'}), 201
-#         except Exception as e:
-#             print("Error:", str(e))  # In lỗi ra console
-#             return jsonify({'error': str(e)}), 500
-
+        return f"<pre>{error_message}</pre>", 500  # Trả về thông báo lỗi dạng HTML và mã lỗi 500.
 
 @app.route('/transaction', methods=['GET', 'POST'])
 def add_transaction():
     if request.method == 'GET':
-        return render_template('transaction.html')  # Hiển thị form nhập giao dịch
+        return render_template('transaction.html')  # Nếu yêu cầu GET, trả về form giao dịch để người dùng nhập dữ liệu.
     if request.method == 'POST':
         try:
-            # Kiểm tra nếu là dạng dữ liệu JSON
-            if request.is_json:
-                data = request.get_json()
+            if request.is_json:  # Kiểm tra nếu dữ liệu yêu cầu là dạng JSON.
+                data = request.get_json()  # Lấy dữ liệu JSON.
             else:
-                # Nếu không phải JSON, lấy từ form
-                data = request.form
-            print("Received Data:", data)  # In ra dữ liệu nhận được
-            # Kiểm tra dữ liệu hợp lệ
+                data = request.form  # Nếu không phải JSON, lấy từ form gửi lên.
+
+            print("Received Data:", data)  # In ra dữ liệu nhận được từ form hoặc JSON cho mục đích debug.
+
+            # Kiểm tra dữ liệu hợp lệ (có sender, receiver, amount).
             if 'sender' not in data or 'receiver' not in data or 'amount' not in data:
-                return jsonify({'error': 'Invalid transaction data'}), 400
-            # Lấy dữ liệu từ form hoặc JSON
-            sender = data['sender']
-            receiver = data['receiver']
-            amount = int(data['amount'])
-            # Thêm giao dịch vào blockchain
+                return jsonify({'error': 'Invalid transaction data'}), 400  # Nếu thiếu dữ liệu, trả về lỗi.
+
+            sender = data['sender']  # Lấy thông tin sender.
+            receiver = data['receiver']  # Lấy thông tin receiver.
+            amount = int(data['amount'])  # Lấy số tiền giao dịch và chuyển thành integer.
+
+            # Thêm giao dịch vào blockchain và trả về vị trí khối tiếp theo.
             index = blockchain.add_transaction(sender, receiver, amount)
-            print(f"Transaction added to block {index}")
-            # Chuyển đến trang chain sau khi thêm giao dịch thành công
-            return redirect('/chain')
+            print(f"Transaction added to block {index}")  # In thông tin giao dịch đã được thêm.
+
+            return redirect('/mine')  # Sau khi thêm giao dịch, chuyển hướng người dùng tới trang mine để đào block mới.
 
         except Exception as e:
-            print("Error:", str(e))  # In lỗi ra console
-            return jsonify({'error': str(e)}), 500
-        
+            print("Error:", str(e))  # In ra lỗi nếu có lỗi trong quá trình xử lý giao dịch.
+            return jsonify({'error': str(e)}), 500  # Trả về lỗi dưới dạng JSON.
+
 @app.route('/logs', methods=['GET'])
 def get_logs():
     try:
-        with open("server.log", "r") as log_file:
+        with open("server.log", "r") as log_file:  # Mở file log và đọc 20 dòng cuối.
             logs = log_file.readlines()[-20:]
-        return jsonify({"logs": logs}), 200
+        return jsonify({"logs": logs}), 200  # Trả về các dòng log dưới dạng JSON.
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500  # Nếu có lỗi, trả về lỗi dưới dạng JSON.
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    port = int(os.getenv("PORT", 5000))  # Lấy port từ biến môi trường, mặc định là 5000.
+    app.run(host='0.0.0.0', port=port, debug=True)  # Chạy ứng dụng Flask trên tất cả các địa chỉ IP (0.0.0.0) và port đã chỉ định, bật chế độ debug.
