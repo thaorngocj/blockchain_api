@@ -1,7 +1,9 @@
 import hashlib # Thư viện tính toán hash
 import json # Thư viện xử lý dữ liệu json
 import time # Thư viện làm việc với thời gian
+import threading
 from flask import Flask, request # Thư viện Flask cho ứng dụng web
+lock = threading.Lock()
 
 class Blockchain:
     def __init__(self):
@@ -59,16 +61,18 @@ class Blockchain:
         return len(self.chain) + 1  # Trả về số khối hiện tại trong blockchain + 1, tức là vị trí của khối tiếp theo.
 
     def mine_block(self):
-        # Hàm đào block mới
-        previous_block = self.get_previous_block()  # Lấy khối trước đó từ blockchain.
-        previous_proof = previous_block['proof']  # Lấy proof của khối trước đó.
-        proof = self.proof_of_work(previous_proof)  # Tìm proof mới cho khối tiếp theo.
-        previous_hash = self.hash(previous_block)  # Tính toán hash của khối trước đó.
+        with lock:    
+            # Hàm đào block mới
+            previous_block = self.get_previous_block()  # Lấy khối trước đó từ blockchain.
+            previous_proof = previous_block['proof']  # Lấy proof của khối trước đó.
+            proof = self.proof_of_work(previous_proof)  # Tìm proof mới cho khối tiếp theo.
+            previous_hash = self.hash(previous_block)  # Tính toán hash của khối trước đó.
 
-        # Tạo khối mới và thêm vào blockchain
-        block = self.create_block(proof, previous_hash)  # Tạo block mới với proof và previous_hash.
-        
-        # Làm sạch danh sách giao dịch sau khi tạo block mới
-        self.transactions = []  # Sau khi block được tạo, danh sách giao dịch được làm sạch.
-        return block  # Trả về khối mới tạo.
+            # Tạo khối mới và thêm vào blockchain
+            block = self.create_block(proof, previous_hash)  # Tạo block mới với proof và previous_hash.
+            
+            # Làm sạch danh sách giao dịch sau khi tạo block mới
+            self.transactions = []  # Sau khi block được tạo, danh sách giao dịch được làm sạch.
+            return block  # Trả về khối mới tạo.
+
 
