@@ -71,3 +71,4 @@ class Blockchain:
         # Làm sạch danh sách giao dịch sau khi tạo block mới
         self.transactions = []  # Sau khi block được tạo, danh sách giao dịch được làm sạch.
         return block  # Trả về khối mới tạo.
+

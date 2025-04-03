@@ -930,3 +930,107 @@
 2025-04-03 22:05:17,301 - INFO - 127.0.0.1 - - [03/Apr/2025 22:05:17] "GET /chain HTTP/1.1" 200 -
 2025-04-03 22:05:20,074 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
 2025-04-03 22:05:20,077 - INFO - 127.0.0.1 - - [03/Apr/2025 22:05:20] "GET / HTTP/1.1" 200 -
+2025-04-03 22:41:41,530 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-04-03 22:41:41,530 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 22:41:41,531 - INFO -  * Restarting with stat
+2025-04-03 22:41:41,719 - WARNING -  * Debugger is active!
+2025-04-03 22:41:41,719 - INFO -  * Debugger PIN: 778-713-581
+2025-04-03 22:41:44,677 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:41:44,684 - INFO - 127.0.0.1 - - [03/Apr/2025 22:41:44] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 22:41:51,738 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:41:51,740 - INFO - 127.0.0.1 - - [03/Apr/2025 22:41:51] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 22:41:51,754 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 22:41:51,913 - INFO - 127.0.0.1 - - [03/Apr/2025 22:41:51] "GET /mine HTTP/1.1" 200 -
+2025-04-03 22:41:53,398 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:41:53,407 - INFO - 127.0.0.1 - - [03/Apr/2025 22:41:53] "GET /chain HTTP/1.1" 200 -
+2025-04-03 22:49:19,409 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\blockchain.py', reloading
+2025-04-03 22:49:19,433 - INFO -  * Restarting with stat
+2025-04-03 22:49:32,666 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-04-03 22:49:32,666 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 22:49:32,667 - INFO -  * Restarting with stat
+2025-04-03 22:49:32,834 - WARNING -  * Debugger is active!
+2025-04-03 22:49:32,837 - INFO -  * Debugger PIN: 778-713-581
+2025-04-03 22:49:36,228 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:49:36,232 - INFO - 127.0.0.1 - - [03/Apr/2025 22:49:36] "GET /chain HTTP/1.1" 200 -
+2025-04-03 22:49:37,771 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 22:49:37,775 - INFO - 127.0.0.1 - - [03/Apr/2025 22:49:37] "GET / HTTP/1.1" 200 -
+2025-04-03 22:49:39,214 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:49:39,218 - INFO - 127.0.0.1 - - [03/Apr/2025 22:49:39] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 22:49:46,729 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:49:46,735 - INFO - 127.0.0.1 - - [03/Apr/2025 22:49:46] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 22:49:46,742 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 22:49:46,922 - INFO - 127.0.0.1 - - [03/Apr/2025 22:49:46] "GET /mine HTTP/1.1" 200 -
+2025-04-03 22:50:31,242 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:50:31,245 - INFO - 127.0.0.1 - - [03/Apr/2025 22:50:31] "GET /chain HTTP/1.1" 200 -
+2025-04-03 22:51:09,403 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\blockchain.py', reloading
+2025-04-03 22:51:09,424 - INFO -  * Restarting with stat
+2025-04-03 22:51:24,742 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.128.24:5000
+2025-04-03 22:51:24,742 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 22:51:24,742 - INFO -  * Restarting with stat
+2025-04-03 22:51:24,931 - WARNING -  * Debugger is active!
+2025-04-03 22:51:24,934 - INFO -  * Debugger PIN: 778-713-581
+2025-04-03 22:51:26,002 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:51:26,006 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:26] "GET /chain HTTP/1.1" 200 -
+2025-04-03 22:51:27,821 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 22:51:27,821 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:27] "GET / HTTP/1.1" 200 -
+2025-04-03 22:51:30,172 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:51:30,172 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:30] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 22:51:41,897 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:51:41,901 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:41] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 22:51:41,912 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 22:51:42,069 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:42] "GET /mine HTTP/1.1" 200 -
+2025-04-03 22:51:46,558 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:51:46,560 - INFO - 127.0.0.1 - - [03/Apr/2025 22:51:46] "GET /chain HTTP/1.1" 200 -
+2025-04-03 22:53:54,041 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 22:53:54,041 - INFO - 127.0.0.1 - - [03/Apr/2025 22:53:54] "GET / HTTP/1.1" 200 -
+2025-04-03 22:53:55,778 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 22:53:55,779 - INFO - 127.0.0.1 - - [03/Apr/2025 22:53:55] "GET /mine HTTP/1.1" 200 -
+2025-04-03 22:53:56,936 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 22:53:56,937 - INFO - 127.0.0.1 - - [03/Apr/2025 22:53:56] "GET / HTTP/1.1" 200 -
+2025-04-03 22:53:57,943 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:53:57,944 - INFO - 127.0.0.1 - - [03/Apr/2025 22:53:57] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 22:54:09,805 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 22:54:09,807 - INFO - 127.0.0.1 - - [03/Apr/2025 22:54:09] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 22:54:09,815 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 22:54:09,907 - INFO - 127.0.0.1 - - [03/Apr/2025 22:54:09] "GET /mine HTTP/1.1" 200 -
+2025-04-03 22:54:12,372 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 22:54:12,376 - INFO - 127.0.0.1 - - [03/Apr/2025 22:54:12] "GET /chain HTTP/1.1" 200 -
+2025-04-03 23:11:51,251 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-04-03 23:11:51,286 - INFO -  * Restarting with stat
+2025-04-03 23:11:51,481 - WARNING -  * Debugger is active!
+2025-04-03 23:11:51,481 - INFO -  * Debugger PIN: 778-713-581
+2025-04-03 23:11:55,503 - INFO -  * Detected change in 'd:\\SimpleBlockChain\\node.py', reloading
+2025-04-03 23:11:55,527 - INFO -  * Restarting with stat
+2025-04-03 23:11:55,731 - WARNING -  * Debugger is active!
+2025-04-03 23:11:55,731 - INFO -  * Debugger PIN: 778-713-581
+2025-04-03 23:12:01,166 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 23:12:01,171 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:01] "GET /chain HTTP/1.1" 200 -
+2025-04-03 23:12:03,624 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 23:12:03,628 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:03] "GET / HTTP/1.1" 200 -
+2025-04-03 23:12:04,968 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 23:12:04,972 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:04] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 23:12:15,036 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 23:12:15,038 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:15] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 23:12:15,046 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 23:12:15,103 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:15] "GET /mine HTTP/1.1" 200 -
+2025-04-03 23:12:18,160 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 23:12:18,162 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:18] "GET /chain HTTP/1.1" 200 -
+2025-04-03 23:12:24,329 - INFO - Request: GET http://127.0.0.1:5000/ - Data: None
+2025-04-03 23:12:24,330 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:24] "GET / HTTP/1.1" 200 -
+2025-04-03 23:12:25,604 - INFO - Request: GET http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 23:12:25,605 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:25] "GET /transaction HTTP/1.1" 200 -
+2025-04-03 23:12:43,464 - INFO - Request: POST http://127.0.0.1:5000/transaction - Data: None
+2025-04-03 23:12:43,466 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:43] "[32mPOST /transaction HTTP/1.1[0m" 302 -
+2025-04-03 23:12:43,474 - INFO - Request: GET http://127.0.0.1:5000/mine - Data: None
+2025-04-03 23:12:43,495 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:43] "GET /mine HTTP/1.1" 200 -
+2025-04-03 23:12:46,163 - INFO - Request: GET http://127.0.0.1:5000/chain - Data: None
+2025-04-03 23:12:46,165 - INFO - 127.0.0.1 - - [03/Apr/2025 23:12:46] "GET /chain HTTP/1.1" 200 -

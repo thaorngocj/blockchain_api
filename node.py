@@ -53,10 +53,42 @@ def get_chain():
 
         return f"<pre>{error_message}</pre>", 500  # Trả về thông báo lỗi dạng HTML và mã lỗi 500.
 
+# @app.route('/transaction', methods=['GET', 'POST'])
+# def add_transaction():
+#     if request.method == 'GET':
+#         return render_template('transaction.html')  # Nếu yêu cầu GET, trả về form giao dịch để người dùng nhập dữ liệu.
+#     if request.method == 'POST':
+#         try:
+#             if request.is_json:  # Kiểm tra nếu dữ liệu yêu cầu là dạng JSON.
+#                 data = request.get_json()  # Lấy dữ liệu JSON.
+#             else:
+#                 data = request.form  # Nếu không phải JSON, lấy từ form gửi lên.
+
+#             print("Received Data:", data)  # In ra dữ liệu nhận được từ form hoặc JSON cho mục đích debug.
+
+#             # Kiểm tra dữ liệu hợp lệ (có sender, receiver, amount).
+#             if 'sender' not in data or 'receiver' not in data or 'amount' not in data:
+#                 return jsonify({'error': 'Invalid transaction data'}), 400  # Nếu thiếu dữ liệu, trả về lỗi.
+
+#             sender = data['sender']  # Lấy thông tin sender.
+#             receiver = data['receiver']  # Lấy thông tin receiver.
+#             amount = int(data['amount'])  # Lấy số tiền giao dịch và chuyển thành integer.
+
+#             # Thêm giao dịch vào blockchain và trả về vị trí khối tiếp theo.
+#             index = blockchain.add_transaction(sender, receiver, amount)
+#             print(f"Transaction added to block {index}")  # In thông tin giao dịch đã được thêm.
+
+#             return redirect('/mine')  # Sau khi thêm giao dịch, chuyển hướng người dùng tới trang mine để đào block mới.
+
+#         except Exception as e:
+#             print("Error:", str(e))  # In ra lỗi nếu có lỗi trong quá trình xử lý giao dịch.
+#             return jsonify({'error': str(e)}), 500  # Trả về lỗi dưới dạng JSON.
+
 @app.route('/transaction', methods=['GET', 'POST'])
 def add_transaction():
     if request.method == 'GET':
         return render_template('transaction.html')  # Nếu yêu cầu GET, trả về form giao dịch để người dùng nhập dữ liệu.
+    
     if request.method == 'POST':
         try:
             if request.is_json:  # Kiểm tra nếu dữ liệu yêu cầu là dạng JSON.
@@ -72,7 +104,12 @@ def add_transaction():
 
             sender = data['sender']  # Lấy thông tin sender.
             receiver = data['receiver']  # Lấy thông tin receiver.
-            amount = int(data['amount'])  # Lấy số tiền giao dịch và chuyển thành integer.
+            
+            # Kiểm tra và chuyển đổi amount thành integer, xử lý trường hợp không hợp lệ.
+            try:
+                amount = int(data['amount'])
+            except ValueError:
+                return jsonify({'error': 'Amount must be a valid number'}), 400  # Nếu amount không phải là số hợp lệ, trả về lỗi.
 
             # Thêm giao dịch vào blockchain và trả về vị trí khối tiếp theo.
             index = blockchain.add_transaction(sender, receiver, amount)
