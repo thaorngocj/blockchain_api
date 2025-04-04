@@ -114,10 +114,12 @@ def add_transaction():
     
     if request.method == 'POST':
         try:
-            if request.is_json:  # Kiểm tra nếu dữ liệu yêu cầu là dạng JSON.
-                data = request.get_json()  # Lấy dữ liệu JSON.
-            else:
-                data = request.form  # Nếu không phải JSON, lấy từ form gửi lên.
+            # if request.is_json:  # Kiểm tra nếu dữ liệu yêu cầu là dạng JSON.
+            #     data = request.get_json()  # Lấy dữ liệu JSON.
+            # else:
+            #     data = request.form  # Nếu không phải JSON, lấy từ form gửi lên.
+            data = request.get_json(silent=True) or request.form
+
 
             print("Received Data:", data)  # In ra dữ liệu nhận được từ form hoặc JSON cho mục đích debug.
 
@@ -156,4 +158,5 @@ def get_logs():
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))  # Lấy port từ biến môi trường, mặc định là 5000.
-    app.run(host='0.0.0.0', port=port, debug=True)  # Chạy ứng dụng Flask trên tất cả các địa chỉ IP (0.0.0.0) và port đã chỉ định, bật chế độ debug.
+    # app.run(host='0.0.0.0', port=port, debug=True)  # Chạy ứng dụng Flask trên tất cả các địa chỉ IP (0.0.0.0) và port đã chỉ định, bật chế độ debug.
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)
